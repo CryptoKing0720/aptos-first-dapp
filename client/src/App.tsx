@@ -1,5 +1,8 @@
 import { Col, Layout, Row } from "antd";
 import React from "react";
+import { WalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
+
+import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
 
 function App() {
   return (
@@ -10,7 +13,7 @@ function App() {
             <h1>Our todolist</h1>
           </Col>
           <Col span={12} style={{ textAlign: "right", paddingRight: "200px" }}>
-            <h1>Connect Wallet</h1>
+            <WalletSelector />
           </Col>
         </Row>
       </Layout>
