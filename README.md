@@ -1,3 +1,1 @@
 # aptos-first-dapp
-
-test
