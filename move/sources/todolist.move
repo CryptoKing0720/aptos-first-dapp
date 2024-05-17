@@ -11,11 +11,6 @@ module todolist_addr::todolist {
     const ETASK_DOESNT_EXIST: u64 = 2;
     const ETASK_IS_COMPLETED: u64 = 3;
     
-    struct TodoList has key {
-        tasks: Table<u64, Task>,
-        set_task_event: event::EventHandle<Task>,
-        task_counter: u64
-    }
     struct Task has store, drop, copy {
         task_id: u64, 
         address: address,
@@ -23,10 +18,39 @@ module todolist_addr::todolist {
         completed: bool,
     }
 
+    struct TodoList has key {
+        tasks: Table<u64, Task>,
+        set_task_event: event::EventHandle<Task>,
+        task_counter: u64
+    }
+     
+    struct Task1 has store, drop, copy {
+        task_id: u64, 
+        address: address,
+        content: String,
+        completed: bool,
+    }
+
+    struct TodoList1 has key {
+        tasks: Table<u64, Task1>,
+        set_task_event: event::EventHandle<Task1>,
+        task_counter: u64
+    }
+
     public entry fun create_list(account: &signer){
         let tasks_holder = TodoList {
             tasks: table::new(),
             set_task_event: account::new_event_handle<Task>(account),
+            task_counter: 0
+        };
+        move_to(account, tasks_holder);
+    }
+
+
+    public entry fun create_list1(account: &signer){
+        let tasks_holder = TodoList1 {
+            tasks: table::new(),
+            set_task_event: account::new_event_handle<Task1>(account),
             task_counter: 0
         };
         move_to(account, tasks_holder);
